@@ -85,7 +85,7 @@ async function getWordToGuess() {
       if (response.status === 401 || (result.state === "error" && result.message === "Unauthorized")) {
         // User is not authenticated, redirect to login
         const currentUrl = new URL(window.location.href);
-        window.location.href = `${currentUrl.origin}/login`;
+        window.location.href = `${currentUrl}login`;
         return;
       }
       
