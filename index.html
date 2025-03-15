@@ -1,0 +1,125 @@
+<!-- Structure and some methods based on this repo-->
+<!-- https://github.com/Morgenstern2573/wordle_clone/tree/master/build -->
+<!-- Based on the game wordle -->
+<!-- https://www.nytimes.com/games/wordle/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Albertle</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link href="css/toastr.min.css" rel="stylesheet"/>
+
+        <script src="javascript/jquery-3.6.0.min.js"></script>
+        <script src="javascript/toastr.min.js"></script>
+        <script src="javascript/howler.min.js"></script>
+    </head>
+    <body>
+        <h1 class="header">ALBERT-LE</h1>
+        
+        <div id="controls">
+            <div class="hard-mode-container">
+                <span class="hard-mode-title">Hard Mode</span>
+                <span class="hard-mode-description">Any revealed hints must be used in subsequent guesses</span>
+            </div>
+            <label class="toggle-label">
+                <input type="checkbox" id="hard-mode-toggle" onclick="this.blur();">
+                <span class="slider" id="hard-mode-slider"></span>
+            </label>
+        </div>
+        
+        <hr class="divider">
+
+        <div id="game-board">
+            <div class="letter-row">
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+            </div>
+            <div class="letter-row">
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+            </div>
+            <div class="letter-row">
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+            </div>
+            <div class="letter-row">
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+            </div>
+            <div class="letter-row">
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+            </div>
+            <div class="letter-row">
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+            </div>
+        </div>
+
+        <div id="keyboard-cont">
+            <div class="first-row">
+                <button class="keyboard-button" onclick="this.blur();">q</button>
+                <button class="keyboard-button" onclick="this.blur();">w</button>
+                <button class="keyboard-button" onclick="this.blur();">e</button>
+                <button class="keyboard-button" onclick="this.blur();">r</button>
+                <button class="keyboard-button" onclick="this.blur();">t</button>
+                <button class="keyboard-button" onclick="this.blur();">y</button>
+                <button class="keyboard-button" onclick="this.blur();">u</button>
+                <button class="keyboard-button" onclick="this.blur();">i</button>
+                <button class="keyboard-button" onclick="this.blur();">o</button>
+                <button class="keyboard-button" onclick="this.blur();">p</button>
+            </div>
+            <div class="second-row">
+                <button class="keyboard-button" onclick="this.blur();">a</button>
+                <button class="keyboard-button" onclick="this.blur();">s</button>
+                <button class="keyboard-button" onclick="this.blur();">d</button>
+                <button class="keyboard-button" onclick="this.blur();">f</button>
+                <button class="keyboard-button" onclick="this.blur();">g</button>
+                <button class="keyboard-button" onclick="this.blur();">h</button>
+                <button class="keyboard-button" onclick="this.blur();">j</button>
+                <button class="keyboard-button" onclick="this.blur();">k</button>
+                <button class="keyboard-button" onclick="this.blur();">l</button>
+            </div>
+            <div class="third-row">
+                <button class="keyboard-button enter" onclick="this.blur();" style="font-size: 0.7rem">Enter</button>
+                <button class="keyboard-button" onclick="this.blur();">z</button>
+                <button class="keyboard-button" onclick="this.blur();">x</button>
+                <button class="keyboard-button" onclick="this.blur();">c</button>
+                <button class="keyboard-button" onclick="this.blur();">v</button>
+                <button class="keyboard-button" onclick="this.blur();">b</button>
+                <button class="keyboard-button" onclick="this.blur();">n</button>
+                <button class="keyboard-button" onclick="this.blur();">m</button>
+                <button class="keyboard-button delete" onclick="this.blur();" style="font-size: 1rem">Del</button>
+            </div>
+        </div>
+
+        <div id="next-word">
+            <button id="next-word-button" class="button-text" onclick="this.blur();">NEXT WORD</button>
+        </div>
+
+        <script src="javascript/albertle.js"></script>
+    </body>
+
+</html>

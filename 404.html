@@ -1,0 +1,107 @@
+<!-- Structure and some methods based on this repo-->
+<!-- https://github.com/Morgenstern2573/wordle_clone/tree/master/build -->
+<!-- Based on the game wordle -->
+<!-- https://www.nytimes.com/games/wordle/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Albertle</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link href="css/toastr.min.css" rel="stylesheet"/>
+
+        <script src="javascript/jquery-3.6.0.min.js"></script>
+        <script src="javascript/toastr.min.js"></script>
+    </head>
+    <body>
+        <h1 class="header">ALBERT-LE</h1>
+
+
+        <div id="game-board">
+            <div class="letter-row">
+                <div class="letter-box">E</div>
+                <div class="letter-box">R</div>
+                <div class="letter-box">R</div>
+                <div class="letter-box">O</div>
+                <div class="letter-box">R</div>
+            </div>
+            <div class="letter-row">
+                <div class="letter-box">4</div>
+                <div class="letter-box">0</div>
+                <div class="letter-box">4</div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+            </div>
+            <div class="letter-row">
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+            </div>
+            <div class="letter-row">
+                <div class="letter-box">P</div>
+                <div class="letter-box">A</div>
+                <div class="letter-box">G</div>
+                <div class="letter-box">E</div>
+                <div class="letter-box"></div>
+            </div>
+            <div class="letter-row">
+                <div class="letter-box">N</div>
+                <div class="letter-box">O</div>
+                <div class="letter-box">T</div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+            </div>
+            <div class="letter-row">
+                <div class="letter-box">F</div>
+                <div class="letter-box">O</div>
+                <div class="letter-box">U</div>
+                <div class="letter-box">N</div>
+                <div class="letter-box">D</div>
+            </div>
+        </div>
+
+        <div id="next-word" style="margin-top: 2rem;">
+            <button id="next-word-button" class="button-text" style="visibility: visible;" onclick="window.location.href = '/'">RETURN</button>
+        </div>
+
+        <script>
+            const colors = ['gray', 'yellow', 'green'];
+            const deltaX = 100;
+            const deltaY = 50;
+            const animationTime = 115;
+
+            const rows = document.getElementsByClassName("letter-row");
+            for (let row = 0; row < rows.length; row++) {
+                for (let i = 0; i < 5; i++) {
+                    let box = rows[row].children[i];
+                    let delay = deltaX * i + deltaY * row;
+
+                    // Do a flip box animation when the next button is pressed that resets the objects
+                    setTimeout(() => {
+                        $(box).css({
+                            'animation': `flipAnimation ${animationTime/1000}s linear`
+                        });
+                    }, delay);
+
+                    setTimeout(() => {
+                        if (box.textContent !== "") {
+                            let randomColor = colors[Math.floor(Math.random() * 3)];
+                            box.classList.add(randomColor);
+                        }
+                    }, delay + animationTime/2);
+
+                    setTimeout(() => {
+                        $(box).css('animation', 'none');
+                        $(box)[0].offsetHeight;
+                    }, delay + animationTime);
+                }
+            }
+        </script>
+    </body>
+
+</html>

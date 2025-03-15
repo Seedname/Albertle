@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Albertle</title>
+        <link rel="stylesheet" href="css/login.css">
+        <link href="css/toastr.min.css" rel="stylesheet"/>
+
+        <script src="javascript/jquery-3.6.0.min.js"></script>
+        <script src="javascript/toastr.min.js"></script>
+    </head>
+
+    <body>
+        <h1 class="header" style="visibility:hidden;">LOGIN</h1>
+
+        <div class="center">
+            <label for="password" class="header small">Password</label>
+            <form id="submit-password">
+                <input id="password" type="password">
+                <input id="submit" class="button-text" type="submit" value="Submit">
+            </form>
+        </div>
+
+        <script>
+            const baseUrl = `${new URL(window.location.href).origin}`;
+
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": true,
+                "positionClass": "toast-top-center",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "fast",
+                "hideDuration": "100",
+                "timeOut": "1500",
+                "extendedTimeOut": "1500",
+                "showEasing": "swing",
+                "hideEasing": "swing",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut",
+                "escapeHTML": true,
+            };
+
+            document.getElementById("submit-password").addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const apiUrl = 'https://5kos39kthd.execute-api.us-east-1.amazonaws.com/prod/auth';
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            'password': document.getElementById("password").value
+                        }),
+                        credentials: 'include' // This is crucial for sending/receiving cookies
+                    });
+
+                    const result = await response.json();
+                    
+                    if (response.ok) {
+                        // Authentication successful
+                        location.href = "/";
+                    } else {
+                        // Show error message
+                        toastr.info(result.message);
+                    }
+                } catch (err) {
+                    console.error('Authentication error:', err);
+                    toastr.info('Failed to connect to the server. Please try again.');
+                }
+            });
+
+        </script>
+    </body>
+
+</html>

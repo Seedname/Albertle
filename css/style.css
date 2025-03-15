@@ -1,0 +1,493 @@
+body {
+    background-color: white;
+    color: black;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.letter-box,
+.keyboard-button,
+.header {
+    font-family: 'Arial', sans-serif;
+}
+
+.header {
+    font-size: 2.5rem;
+    font-weight: 1000;
+    text-align: center;
+    letter-spacing: 0.15rem;
+}
+
+/*** Game Board ***/
+#game-board {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.letter-box {
+    user-select: none;
+
+    border: 2px solid #d4d6da;
+    margin: 2.5px;
+
+    height: 3.25rem;
+    width: 3.25rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-transform: uppercase;
+    color: black;
+    font-size: 1.9rem;
+    font-weight: 600;
+
+}
+
+.filled-box {
+    border: 2px solid gray;
+}
+
+.letter-box.green {
+    background-color:#6ca965;
+    border: 2px solid#6ca965;
+    color: white;
+}
+
+.letter-box.gray {
+    background-color: #787c7f;
+    border: 2px solid #787c7f;
+    color: white;
+}
+
+.letter-box.yellow {
+    background-color: #c8b653;
+    border: 2px solid #c8b653;
+    color: white;
+}
+
+.letter-row {
+    display: flex;
+}
+
+.second-row {
+    margin: 0.5rem 0;
+}
+
+/*** Keyboard ***/
+
+#keyboard-cont {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    overflow-x: auto; /* Allows horizontal scrolling if content overflows */
+}
+
+
+#keyboard-cont div {
+    display: flex;
+}
+
+.keyboard-button {
+
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+    padding-top: 1.1rem;
+    padding-bottom: 1.1rem;
+    border-radius: 5px;
+    margin: 0 0.2rem;
+    cursor: pointer;
+
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    color: black;
+
+    border: none;
+    background-color: #d4d6da;
+
+}
+
+.divider {
+    display: none;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin-bottom: 0.75rem;
+    padding: 0;
+}
+
+@media (max-width: 500px) {
+    .header {
+        display: none;
+    }
+
+    .keyboard-button {
+        padding-left: 2.6vw;
+        padding-right: 2.6vw;
+        padding-top: 4.2vw;
+        padding-bottom: 4.2vw;
+        font-size: 4.7vw;
+        margin: 0 0.7vw;
+    }
+
+    .keyboard-button.enter {
+        font-size: 3vw !important;
+    }
+
+    .keyboard-button.delete {
+        font-size: 3vw !important;
+    }
+
+
+    .hard-mode-title {
+        font-size: 5vw !important;
+    }
+
+    .hard-mode-description {
+        font-size: 3vw !important;
+    }
+    
+    #controls {
+        padding-bottom: 0 !important;
+    }
+
+    .divider {
+        display: block;
+    }
+}
+
+.keyboard-button.green {
+    background-color:#6aaa64;
+    color: white;
+}
+
+.keyboard-button.gray {
+    background-color: #787c7f;
+    color: white;
+}
+
+.keyboard-button.yellow {
+    background-color: #c8b653;
+    color: white;
+}
+
+/*** Overriding toast options ***/
+
+#toast-container > .toast {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: black;
+    color: white;
+
+    font-family: Arial, sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-align: center;
+    
+    border-radius: 5px;
+    opacity: 1;
+
+    width: fit-content !important;
+    height: 2.75rem;
+}
+
+/* remove all pointer related events such as hovering, and the shadow */
+#toast-container > div {
+    pointer-events: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+#toast-container > div.toast-info {
+    /* remove background image */
+    background-image: none !important;
+    padding: 10px;
+}
+
+/*** Next Button ***/
+
+#next-word {    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+.button-text {
+
+    background-color: #6aaa64;
+    color: white;
+
+    border: 0;
+    border-radius: 5px;
+    padding: 0.8rem;
+
+    font-family: Arial, sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-align: center;
+    
+    cursor: pointer;
+
+}
+
+/*** Hard Mode Slider **/
+
+#controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    padding-bottom: 1.5rem;
+    padding-top: 0.5rem;
+
+    font-family: Arial, sans-serif;
+    font-size: 1.2rem;
+    color: #333;
+
+}
+
+.toggle-label {
+    position: relative;
+    display: inline-block;
+
+    width: 42px;
+    height: 25px;
+    margin-left: 10px;
+}
+
+.toggle-label input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: #888;
+    border-radius: 25px;
+    transition: 0.4s;
+}
+
+#hard-mode-toggle:not(.on) + .slider.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+
+    height: 19px;
+    width: 19px;
+    left: 3px;
+    bottom: 3px;
+
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: #6aaa64;
+}
+
+input:checked + .slider:before {
+    transform: translateX(17px);
+}
+
+.hard-mode-container {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.hard-mode-title {
+    font-size: 1.2rem;
+    font-weight: 550;
+}
+
+.hard-mode-description {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/*** Dark Mode ***/
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121213;
+        color: #f8f8f8;
+    }
+
+    .letter-box {
+        border: 2px solid #3a3a3c;
+        color: #f8f8f8;
+    }
+
+    .filled-box {
+        border: 2px solid #565758;
+    }
+    
+    .letter-box.green {
+        background-color:#538d4e;
+        border: 2px solid#538d4e;
+        color: white;
+    }
+    
+    .letter-box.gray {
+        background-color: #3a3a3c;
+        border: 2px solid #3a3a3c;
+        color: white;
+    }
+    
+    .letter-box.yellow {
+        background-color: #b59f3b;
+        border: 2px solid #b59f3b;
+        color: white;
+    }
+
+    .keyboard-button {
+        color: #f8f8f8;
+        background-color: #818384;
+    }
+
+    .keyboard-button.green {
+        background-color:#538d4e;
+        color: #f8f8f8;
+    }
+    
+    .keyboard-button.gray {
+        background-color: #3a3a3c;
+        color: #f8f8f8;
+    }
+    
+    .keyboard-button.yellow {
+        background-color: #b59f3b;
+        color: #f8f8f8;
+    }
+
+    #toast-container > .toast {
+        background-color: #f8f8f8;
+        color: #1b1b1c;
+    }
+
+    .button-text {
+        background-color:#538d4e;
+        color: #f8f8f8;
+    }
+
+    #controls {
+        color: #bababa;
+    }
+    
+    .slider {
+        background-color: #565758;
+    }
+
+    #hard-mode-toggle:not(.on) + .slider.disabled {
+        background-color: #343436;
+    }
+
+    #hard-mode-toggle:not(.on) + .slider.disabled:before {
+        background-color: #888889;
+    }
+
+    input:checked + .slider {
+        background-color: #538d4e;
+    }
+
+    .hard-mode-description {
+        color: #919c9a;
+    }
+
+    .divider {
+        border-top: 1px solid #3a3a3c;
+    }
+}
+
+/*** Animations ***/
+
+/* Flips a letter vertically */
+@keyframes flipAnimation {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1, 0);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+/* Shakes the row horizontally */
+@keyframes shakeAnimation {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+    75% {
+        transform: translateX(-5px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Bounces the letters up and down */
+@keyframes winAnimation {
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-1.625rem);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(-0.8125rem);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+
