@@ -61,29 +61,39 @@ function getCookie(name) {
 // function that sends a POST request to the API endpoint for a new random word
 const baseUrl = 'https://meq2tyqry9.execute-api.us-east-1.amazonaws.com/prod';
 
+// function that sends a POST request to the API endpoint for a new random word
 async function getWordToGuess() {
-  const apiUrl = '/api/get-word'; // Updated endpoint path
-  try {
-    const response = await fetch(baseUrl + apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include', // Important for sending cookies
-      body: JSON.stringify({})
-    });
-    
-    const result = await response.json();
-    requests_responses.push({
-      endpoint: baseUrl + apiUrl,
-      method: 'POST'
-    });
-    requests_responses.push(result);
-    wordToGuess = result.word;
-  } catch (err) {
-    toastr.info("Error fetching word");
-    console.error(err);
-  }
+    const apiUrl = '/api/get-word'; // Updated endpoint path
+    try {
+      const response = await fetch(baseUrl + apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include', // Important for sending cookies
+        body: JSON.stringify({})
+      });
+      
+      const result = await response.json();
+      requests_responses.push({
+        endpoint: baseUrl + apiUrl,
+        method: 'POST'
+      });
+      requests_responses.push(result);
+      
+      // Check for authentication error
+      if (response.status === 401 || (result.state === "error" && result.message === "Unauthorized")) {
+        // User is not authenticated, redirect to login
+        const currentUrl = new URL(window.location.href);
+        window.location.href = `${currentUrl.origin}/login`;
+        return;
+      }
+      
+      wordToGuess = result.word;
+    } catch (err) {
+      toastr.info("Error fetching word");
+      console.error(err);
+    }
 }
 
 
