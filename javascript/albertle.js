@@ -59,7 +59,7 @@ function getCookie(name) {
 }
 
 // function that sends a POST request to the API endpoint for a new random word
-const baseUrl = 'https://meq2tyqry9.execute-api.us-east-1.amazonaws.com/prod';
+const baseUrl = 'https://mx0b022wy4.execute-api.us-east-1.amazonaws.com/prod';
 
 // function that sends a POST request to the API endpoint for a new random word
 async function getWordToGuess() {
